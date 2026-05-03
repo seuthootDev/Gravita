@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2"]
+radius = 260.0
+
+[node name="PlanetLarge_JUNGLE_WORLD" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
+
+[node name="GravityField" type="Area2D" parent="."]
+monitorable = false
+collision_layer = 0
+collision_mask = 1
+
+[node name="GravityShape" type="CollisionShape2D" parent="GravityField"]
+shape = SubResource("CircleShape2D_2")
+

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c1j7nhi27lnnx"]
+
+[ext_resource type="Texture2D" uid="uid://ch6lk3sgaeivp" path="res://Gemini_Generated_Image_iuwmpdiuwmpdiuwm.png" id="1_o8eyn"]
+[ext_resource type="Material" uid="uid://ccqsfwm5sklaa" path="res://materials/atlas_key_remove.tres" id="2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 18.0
+
+[node name="Ship_BoosterOn" type="CharacterBody2D" unique_id=1945568618]
+collision_mask = 2
+
+[node name="ShipSprite" type="Sprite2D" parent="." unique_id=712222125]
+texture_filter = 1
+material = ExtResource("2")
+position = Vector2(0, 8.9)
+texture = ExtResource("1_o8eyn")
+region_enabled = true
+region_rect = Rect2(36.242554, 25.713354, 77.1928, 127.99996)
+region_filter_clip_enabled = true
+
+[node name="BoosterSprite" type="Sprite2D" parent="." unique_id=853824586]
+texture_filter = 1
+material = ExtResource("2")
+
+[node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=1094742180]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Marker_Engine" type="Marker2D" parent="." unique_id=1016127520]
+position = Vector2(0, 22)

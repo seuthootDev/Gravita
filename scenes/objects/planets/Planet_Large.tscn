@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://5k5fdfdntne7"]
+
+[ext_resource type="Texture2D" uid="uid://ch6lk3sgaeivp" path="res://Gemini_Generated_Image_iuwmpdiuwmpdiuwm.png" id="1_nqlac"]
+[ext_resource type="Material" uid="uid://ccqsfwm5sklaa" path="res://materials/atlas_key_remove.tres" id="2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2"]
+radius = 260.0
+
+[node name="PlanetLarge" type="Area2D" unique_id=724357731]
+collision_layer = 2
+collision_mask = 1
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=9569754]
+texture_filter = 1
+material = ExtResource("2")
+texture = ExtResource("1_nqlac")
+region_enabled = true
+region_rect = Rect2(805.95636, 143.65501, 83.04364, 83.372604)
+region_filter_clip_enabled = true
+
+[node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=157035169]
+shape = SubResource("CircleShape2D_1")
+
+[node name="GravityField" type="Area2D" parent="." unique_id=1489289524]
+collision_layer = 0
+monitorable = false
+collision_mask = 1
+
+[node name="GravityShape" type="CollisionShape2D" parent="GravityField" unique_id=1371313120]
+shape = SubResource("CircleShape2D_2")

@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ccqsfwm5sklaa"]
+
+[ext_resource type="Shader" uid="uid://b7ispx468ashu" path="res://materials/atlas_key_remove.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/key_color = Color(0.992157, 0.882353, 0.003922, 1)
+shader_parameter/key_threshold = 0.08
+shader_parameter/edge_softness = 0.03
+shader_parameter/despill_strength = 0.65
+shader_parameter/sat_threshold = 0.0
+shader_parameter/value_threshold = 1.0
+shader_parameter/spill_remove_strength = 0.72
+shader_parameter/edge_band_blacken = 0.55
+shader_parameter/inner_yellow_blacken = 0.55
+shader_parameter/inner_yellow_max_dist = 0.22
+shader_parameter/outline_texels = 1.25
+shader_parameter/outline_empty_alpha = 0.12
+shader_parameter/outline_neighbor_alpha = 0.1
+shader_parameter/outline_alpha = 1.0
