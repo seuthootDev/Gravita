@@ -8,7 +8,7 @@ extends Control
 @onready var ship_preview_off: Node2D = $ShipPreviewOff
 @onready var ship_preview_on: Node2D = $ShipPreviewOn
 
-const GAME_SCENE_PATH := "res://scenes/stages/stage1/Stage1.tscn"
+const GAME_SCENE_PATH := "res://scenes/stages/stage2/Stage2.tscn"
 
 func _ready() -> void:
 	start_button.pressed.connect(_on_start_pressed)

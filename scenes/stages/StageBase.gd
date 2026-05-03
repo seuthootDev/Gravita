@@ -6,9 +6,6 @@ extends Node2D
 @onready var fuel_bar: ProgressBar = $UI/FuelBar
 @onready var gravity_viz: Node2D = $Planet/GravityViz
 
-@export var gravity_strength := 9600000.0
-@export var gravity_min_dist := 60.0
-@export var gravity_radius_scale := 1.0
 @export var bounds_margin := 160.0
 
 # World space bounds for "map out" (in pixels).
@@ -22,13 +19,17 @@ var _gravity_radius := 260.0
 var _planet_base := Vector2.ZERO
 
 func _ready() -> void:
+	add_to_group("stage")
 	planet.body_entered.connect(_on_planet_body_entered)
 	goal.body_entered.connect(_on_goal_body_entered)
 	_planet_base = planet.position
 
-	var shape := planet.get_node("GravityField/GravityShape") as CollisionShape2D
-	if shape and shape.shape is CircleShape2D:
-		_gravity_radius = (shape.shape as CircleShape2D).radius * gravity_radius_scale
+	if planet.has_method("get_gravity_radius"):
+		_gravity_radius = planet.call("get_gravity_radius")
+	else:
+		var shape := planet.get_node_or_null("GravityField/GravityShape") as CollisionShape2D
+		if shape and shape.shape is CircleShape2D:
+			_gravity_radius = (shape.shape as CircleShape2D).radius
 
 	if gravity_viz:
 		gravity_viz.radius = _gravity_radius
@@ -59,17 +60,31 @@ func _update_fuel_ui() -> void:
 		fuel_bar.value = ship.call("fuel_ratio") * 100.0
 
 func _apply_gravity() -> void:
+	for node in get_tree().get_nodes_in_group("black_hole"):
+		if node.has_method("apply_gravity_acceleration"):
+			node.call("apply_gravity_acceleration", ship)
+
+	for node in get_tree().get_nodes_in_group("moon_gravity"):
+		if node.has_method("apply_gravity_acceleration"):
+			node.call("apply_gravity_acceleration", ship)
+
 	if not _is_ship_in_gravity():
 		return
 
 	var ship_pos := ship.global_position
 	var planet_pos := planet.global_position
 	var delta := planet_pos - ship_pos
-	var dist := maxf(delta.length(), gravity_min_dist)
+	var min_dist := 60.0
+	var strength := 9_600_000.0
+	if planet.has_method("get_gravity_min_dist"):
+		min_dist = planet.call("get_gravity_min_dist")
+	if planet.has_method("get_gravity_strength"):
+		strength = planet.call("get_gravity_strength")
+	var dist := maxf(delta.length(), min_dist)
 	var dir := delta / dist
 
 	# Simple tuned gravity: inverse-square with clamp.
-	var a := dir * (gravity_strength / (dist * dist))
+	var a := dir * (strength / (dist * dist))
 
 	if ship.has_method("add_external_accel"):
 		ship.call("add_external_accel", a)

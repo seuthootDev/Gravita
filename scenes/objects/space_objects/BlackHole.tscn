@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://84mhxykum7ij"]
+
+[ext_resource type="Script" uid="uid://cex2c0j8fgey4" path="res://scenes/objects/space_objects/BlackHole.gd" id="1"]
+[ext_resource type="Script" uid="uid://qwgday1ffq5y" path="res://scenes/objects/space_objects/ObstacleHazard.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://ch6lk3sgaeivp" path="res://Gemini_Generated_Image_iuwmpdiuwmpdiuwm.png" id="2_y27e4"]
+[ext_resource type="Material" uid="uid://ccqsfwm5sklaa" path="res://materials/atlas_key_remove.tres" id="3_atlas"]
+[ext_resource type="Script" uid="uid://c78u8y1pkb87g" path="res://scenes/stages/stage1/GravityViz.gd" id="4_viz"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kill"]
+radius = 24.0
+
+[node name="BlackHole" type="Node2D" unique_id=798194698]
+script = ExtResource("1")
+gravity_strength = 26000000.0 
+gravity_radius = 220.0
+
+[node name="GravityViz" type="Node2D" parent="." unique_id=90010001]
+z_index = -1
+script = ExtResource("4_viz")
+radius = 220.0
+dash_color = Color(1, 0.48, 0.12, 0.92)
+dash_len = 14.0
+gap_len = 9.0
+width = 2.5
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=634250715]
+texture_filter = 1
+material = ExtResource("3_atlas")
+modulate = Color(1, 1, 1, 1)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("2_y27e4")
+region_enabled = true
+region_rect = Rect2(1198.0313, 392.0774, 181.96875, 126.47186)
+region_filter_clip_enabled = true
+
+[node name="KillZone" type="Area2D" parent="." unique_id=644229317]
+collision_layer = 2
+script = ExtResource("2")
+death_reason = "BLACK_HOLE"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=1636558500]
+shape = SubResource("CircleShape2D_kill")

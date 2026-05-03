@@ -1,5 +1,7 @@
 [gd_scene format=3]
 
+[ext_resource type="Script" path="res://scenes/objects/planets/PlanetGravity.gd" id="pg_script"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 46.0
 
@@ -9,6 +11,10 @@ radius = 260.0
 [node name="PlanetLarge_FANTASY_ELECTRICAL_TESLA_WORLD" type="Area2D"]
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("pg_script")
+gravity_strength = 9600000.0
+gravity_min_dist = 60.0
+gravity_radius_scale = 1.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1

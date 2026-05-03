@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/objects/space_objects/OrbitalObstacle.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/objects/space_objects/ObstacleHazard.gd" id="2"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hazard"]
+radius = 12.0
+
+[node name="ArtificialSatellite" type="Node2D"]
+script = ExtResource("1")
+orbit_target = NodePath("../Planet")
+orbit_radius = 120.0
+orbit_speed = 1.0
+
+[node name="Hazard" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("2")
+death_reason = "SATELLITE"
+
+[node name="Sprite2D" type="Sprite2D" parent="Hazard"]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard"]
+shape = SubResource("CircleShape2D_hazard")

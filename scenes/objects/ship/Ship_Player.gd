@@ -12,6 +12,7 @@ extends CharacterBody2D
 var accel_external := Vector2.ZERO
 
 func _ready() -> void:
+	add_to_group("player")
 	velocity = initial_velocity
 	rotation = 0.0
 

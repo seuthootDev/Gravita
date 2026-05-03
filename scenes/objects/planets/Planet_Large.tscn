@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://5k5fdfdntne7"]
 
+[ext_resource type="Script" path="res://scenes/objects/planets/PlanetGravity.gd" id="pg_script"]
+
 [ext_resource type="Texture2D" uid="uid://ch6lk3sgaeivp" path="res://Gemini_Generated_Image_iuwmpdiuwmpdiuwm.png" id="1_nqlac"]
 [ext_resource type="Material" uid="uid://ccqsfwm5sklaa" path="res://materials/atlas_key_remove.tres" id="2"]
 
@@ -12,6 +14,10 @@ radius = 260.0
 [node name="PlanetLarge" type="Area2D" unique_id=724357731]
 collision_layer = 2
 collision_mask = 1
+script = ExtResource("pg_script")
+gravity_strength = 9600000.0
+gravity_min_dist = 60.0
+gravity_radius_scale = 1.0
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=9569754]
 texture_filter = 1
